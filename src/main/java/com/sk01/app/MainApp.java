@@ -19,7 +19,7 @@ public class MainApp {
 
         // com.localimpl.Local && com.driveimpl.GoogleDrive
         try {
-            Class.forName("com.driveimpl.GoogleDrive");
+            Class.forName("com.sk01.driveimpl.GoogleDrive");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -50,7 +50,7 @@ public class MainApp {
             try {
 
                 //STORAGE
-                if (commArray[0].equals("createstorage") && commArray.length == 5) {
+                if (commArray[0].equals("createstorage") && commArray.length == 3) {
                     storage.createStorage(commArray[1], commArray[2]);
                     continue;
                 }
@@ -100,11 +100,11 @@ public class MainApp {
                 }
 
 
-
+                //getFiles myDrive
                 //OPERATIONS
-                if (commArray[0].equals("getfiles") && commArray.length == 2) {
-                    String path = commArray[1].equals("/root") ? "" : commArray[1];
-                    printFiles(search.getAllFiles(path));
+                if ( commArray[0].equals("getfiles")) {
+                    //String path = commArray[1].equals("/root") ? "" : commArray[1];
+                    printFiles(search.getAllFiles("."));
                     continue;
                 }
 
