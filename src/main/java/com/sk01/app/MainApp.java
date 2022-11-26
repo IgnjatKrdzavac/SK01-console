@@ -94,8 +94,8 @@ public class MainApp {
                     continue;
                 }
 
-                if (commArray[0].equals("createfiles") && commArray.length == 2) {
-                    //create.createFiles(Arrays.asList(commArray[1].split(",")));
+                if (commArray[0].equals("createfile") && commArray.length == 3) {
+                    create.createFiles(commArray[1], commArray[2]);
                     continue;
                 }
 
