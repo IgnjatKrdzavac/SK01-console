@@ -84,6 +84,11 @@ public class MainApp {
                     continue;
                 }
 
+                if (commArray[0].equals("createdir") && commArray.length == 3) {
+                    create.createDir(commArray[1],commArray[2]);
+                    continue;
+                }
+
                 if (commArray[0].equals("createdirs") && commArray.length == 3) {
                     create.createDirs(commArray[1],Integer.parseInt(commArray[2]));
                     continue;
@@ -96,6 +101,10 @@ public class MainApp {
 
                 if (commArray[0].equals("createfile") && commArray.length == 3) {
                     create.createFiles(commArray[1], commArray[2]);
+                    continue;
+                }
+                if (commArray[0].equals("createfiles") && commArray.length == 3) {
+                    create.createFiles(commArray[1], Integer.parseInt(commArray[2]));
                     continue;
                 }
 
