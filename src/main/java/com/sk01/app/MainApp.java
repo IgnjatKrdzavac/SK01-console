@@ -17,8 +17,8 @@ public class MainApp {
 
     public static void main(String[] args) {
 
-        // com.localimpl.Local && com.driveimpl.GoogleDrive
         try {
+//            Class.forName("com.sk01.local.Local");
             Class.forName("com.sk01.driveimpl.GoogleDrive");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -166,6 +166,12 @@ public class MainApp {
         }
     }
 
+    private static void printFiles(List<File> metadataList) {
+        for (File metadata: metadataList) {
+            System.out.println(metadata);
+        }
+    }
+
     private static void help() {
         System.out.println("INFO:");
         System.out.println("    Path within storage must be relative");
@@ -204,11 +210,5 @@ public class MainApp {
         System.out.println("    Download File - download from_path to_path");
         System.out.println("    Move File - move from_path to_path");
 //        System.out.println("    Get Sort By - sort path criteria -> sortByName, sortByDate, sortByModification and combinations ex. sortByName-sortByDate");
-    }
-
-    private static void printFiles(List<File> metadataList) {
-        for (File metadata: metadataList) {
-            System.out.println(metadata);
-        }
     }
 }
