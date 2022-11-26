@@ -10,18 +10,15 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class MainApp {
 
     public static void main(String[] args) {
 
-        // com.localimpl.Local && com.driveimpl.GoogleDrive
         try {
+//            Class.forName("com.sk01.driveimpl.GoogleDrive");
             Class.forName("com.sk01.localImpl.Local");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -35,8 +32,8 @@ public class MainApp {
         Scanner scanner = new Scanner(System.in);
         String command;
 
-        System.out.println("If you need some instructions, please type command help");
-        System.out.println("If you want to quit application, please type command exit");
+        System.out.println("Use command 'help' for instructions.");
+        System.out.println("To quit application use command 'exit'");
 
         while (true) {
             command = scanner.nextLine();
@@ -80,7 +77,6 @@ public class MainApp {
                     continue;
                 }
 
-
                 //CREATE
                 if (commArray[0].equals("createdir") && commArray.length == 2) {
                     create.createDir(commArray[1]);
@@ -111,7 +107,6 @@ public class MainApp {
                     continue;
                 }
 
-
                 //OPERATIONS
                 if (commArray[0].equals("deletefile") && commArray.length == 2) {
                     operations.deleteFile(commArray[1]);
@@ -138,21 +133,43 @@ public class MainApp {
                     continue;
                 }
 
-
-
-
                 //SEARCH
-                if (commArray[0].equals("getfile") && commArray.length == 2) {
-                    printFile(search.getFile(commArray[1]));
-                    continue;
-                }
-                if (commArray[0].equals("getallfiles") && commArray.length == 2) {
-                    printFiles(search.getAllFiles(commArray[1]));
+                if (commArray[0].equals("getfiles") && commArray.length == 2) {
+                    System.out.println((search.getFile(commArray[1])));
                     continue;
                 }
 
-                /*
-                System.out.println("Incorrect command, for more information use command help");*/
+                if (commArray[0].equals("getdir") && commArray.length == 2) {
+                    System.out.println((search.getDir(commArray[1])));
+                    continue;
+                }
+
+                if (commArray[0].equals("getallfiles") && commArray.length == 1) {
+                    System.out.println((search.getAllFiles()));
+                    continue;
+                }
+
+                if (commArray[0].equals("getallfiles") && commArray.length == 2) {
+                    System.out.println((search.getAllFiles(commArray[1])));
+                    continue;
+                }
+
+                if (commArray[0].equals("getcontains") && commArray.length == 2) {
+                    System.out.println((search.getFiles(commArray[1])));
+                    continue;
+                }
+
+                if (commArray[0].equals("getfileswe") && commArray.length == 2) {
+                    System.out.println((search.getFilesWithExtension(commArray[1])));
+                    continue;
+                }
+
+                if (commArray[0].equals("getfilesbetween") && commArray.length == 4) {
+                    System.out.println((search.getFiles(commArray[1], new Date(commArray[2]), new Date(commArray[3]))));
+                    continue;
+                }
+
+                System.out.println("Incorrect command! For help use help command.");
 
             } catch (Exception exception) {
                 System.out.println(exception.getMessage());
@@ -164,8 +181,6 @@ public class MainApp {
         System.out.println("INFO:");
         System.out.println("    Path within storage must be relative");
         System.out.println("    Empty path is marked as '.'");
-//        System.out.println("    Path outside of storage must be absolute");
-//        System.out.println("    Root path must be entered as - /root");
         System.out.println("    When creating and logging to storage path must be absolute");
         System.out.println("    Dates format: dd/MM/yyyy");
 
@@ -196,7 +211,7 @@ public class MainApp {
         System.out.println("    Delete File - deletefile path");
         System.out.println("    Delete All - deleteall root_path");
         System.out.println("    Download File - download from_path to_path");
-        System.out.println("    Move File - move from_path to_path");
+        System.out.println("    Move File - movefiles from_path to_path");
 //        System.out.println("    Get Sort By - sort path criteria -> sortByName, sortByDate, sortByModification and combinations ex. sortByName-sortByDate");
     }
 
