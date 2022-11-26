@@ -107,10 +107,36 @@ public class MainApp {
                     create.createFiles(commArray[1], Integer.parseInt(commArray[2]));
                     continue;
                 }
-
-
-                //getFiles myDrive
                 //OPERATIONS
+                if (commArray[0].equals("deletefile") && commArray.length == 2) {
+                    operations.deleteFile(commArray[1]);
+                    continue;
+                }
+                if (commArray[0].equals("deletedir") && commArray.length == 2) {
+                    operations.deleteDir(commArray[1]);
+                    continue;
+                }
+                if (commArray[0].equals("deleteall") && commArray.length == 2) {
+                    operations.deleteAll(commArray[1]);
+                    continue;
+                }
+                if (commArray[0].equals("movefiles") && commArray.length == 3) {
+                    operations.moveFiles(commArray[1],commArray[2]);
+                    continue;
+                }
+                if (commArray[0].equals("downloadfile") && commArray.length == 3) {
+                    operations.downloadFile(commArray[1],commArray[2]);
+                    continue;
+                }
+                if (commArray[0].equals("rename") && commArray.length == 3) {
+                    operations.rename(commArray[1], commArray[2]);
+                    continue;
+                }
+
+
+
+
+                //SEARCH
                 if ( commArray[0].equals("getfiles")) {
                     //String path = commArray[1].equals("/root") ? "" : commArray[1];
                     printFiles(search.getAllFiles("."));
