@@ -183,12 +183,12 @@ public class MainApp {
 
         System.out.println("SEARCH:");
         System.out.println("    Get File - getfiles path");
+        System.out.println("    Get Directory - getdir path");
         System.out.println("    Get All Files - getallfiles");
         System.out.println("    Get All Files - getallfiles path");
         System.out.println("    Get Files That Contain String - getfilespodstring podstring");
         System.out.println("    Get All Files With Extention - getfileswe path e");
         System.out.println("    Contains Files? - getContains path file_names");
-        System.out.println("    Get Directory - getdir path");
         System.out.println("    Get Files In Between Dates - getfilesbetween path start_date end_date");
 
         System.out.println("OPERATIONS:");
