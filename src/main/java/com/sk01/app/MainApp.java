@@ -7,6 +7,9 @@ import com.sk01.storage.Operations;
 import com.sk01.StorageManager;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -107,6 +110,8 @@ public class MainApp {
                     create.createFiles(commArray[1], Integer.parseInt(commArray[2]));
                     continue;
                 }
+
+
                 //OPERATIONS
                 if (commArray[0].equals("deletefile") && commArray.length == 2) {
                     operations.deleteFile(commArray[1]);
@@ -137,62 +142,16 @@ public class MainApp {
 
 
                 //SEARCH
-                if ( commArray[0].equals("getfiles")) {
-                    //String path = commArray[1].equals("/root") ? "" : commArray[1];
-                    printFiles(search.getAllFiles("."));
+                if (commArray[0].equals("getfile") && commArray.length == 2) {
+                    printFile(search.getFile(commArray[1]));
+                    continue;
+                }
+                if (commArray[0].equals("getallfiles") && commArray.length == 2) {
+                    printFiles(search.getAllFiles(commArray[1]));
                     continue;
                 }
 
-                /*if (commArray[0].equals("getdirs") && commArray.length == 2) {
-                    String path = commArray[1].equals("/root") ? "" : commArray[1];
-                    printFiles(operations.getAllDirectories(path));
-                    continue;
-                }
-
-                if (commArray[0].equals("getall") && commArray.length == 2) {
-                    String path = commArray[1].equals("/root") ? "" : commArray[1];
-                    printFiles(operations.getAllFilesRecursive(path));
-                    continue;
-                }
-
-                if (commArray[0].equals("download") && commArray.length == 2) {
-                    operations.download(commArray[1]);
-                    continue;
-                }
-
-                if (commArray[0].equals("upload") && commArray.length == 3) {
-                    String toPath = commArray[2].equals("/root") ? "" : commArray[2];
-                    operations.uploadFile(commArray[1], toPath);
-                    continue;
-                }
-
-                if (commArray[0].equals("move") && commArray.length == 3) {
-                    String toPath = commArray[2].equals("/root") ? "" : commArray[2];
-                    operations.moveFile(commArray[1], toPath);
-                    continue;
-                }
-
-                if (commArray[0].equals("getfileswe") && commArray.length == 3) {
-                    String path = commArray[1].equals("/root") ? "" : commArray[1];
-                    printFiles(operations.getAllFilesWithExtention(operations.getAllFiles(path), commArray[2]));
-                    continue;
-                }
-
-                if (commArray[0].equals("sort") && commArray.length == 3) {
-                    String path = commArray[1].equals("/root") ? "" : commArray[1];
-                    printFiles(operations.getSortedBy(operations.getAllFiles(path), commArray[2]));
-                    continue;
-                }
-
-                if (commArray[0].equals("between") && commArray.length == 4) {
-                    String path = commArray[1].equals("/root") ? "" : commArray[1];
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                    Date startDate = sdf.parse(commArray[2]);
-                    Date endDate = sdf.parse(commArray[3]);
-                    printFiles(operations.getInBetweenDates(operations.getAllFiles(path), startDate, endDate));
-                    continue;
-                }
-
+                /*
                 System.out.println("Incorrect command, for more information use command help");*/
 
             } catch (Exception exception) {
@@ -243,7 +202,17 @@ public class MainApp {
 
     private static void printFiles(List<File> metadataList) {
         for (File metadata: metadataList) {
-            System.out.println(metadata);
+            try {
+                printFile(metadata);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
+    }
+
+    private static void  printFile(File file) throws IOException {
+        BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
+
+        System.out.println(file.getName() + " creationTime:" + attr.creationTime() + " lastModifiedTime:" + attr.lastModifiedTime());
     }
 }
