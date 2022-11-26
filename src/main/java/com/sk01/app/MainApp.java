@@ -19,7 +19,7 @@ public class MainApp {
 
         // com.localimpl.Local && com.driveimpl.GoogleDrive
         try {
-            Class.forName("com.sk01.driveimpl.GoogleDrive");
+            Class.forName("com.sk01.localImpl.Local");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -84,8 +84,8 @@ public class MainApp {
                     continue;
                 }
 
-                if (commArray[0].equals("createdirs") && commArray.length == 2) {
-//                    create.createDirs(Arrays.asList(commArray[1].split(",")));
+                if (commArray[0].equals("createdirs") && commArray.length == 3) {
+                    create.createDirs(commArray[1],Integer.parseInt(commArray[2]));
                     continue;
                 }
 
