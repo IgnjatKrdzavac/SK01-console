@@ -18,8 +18,8 @@ public class MainApp {
     public static void main(String[] args) {
 
         try {
-//            Class.forName("com.sk01.driveimpl.GoogleDrive");
-            Class.forName("com.sk01.localImpl.Local");
+            //Class.forName("com.sk01.driveimpl.GoogleDrive");
+             Class.forName("com.sk01.localImpl.Local");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -53,6 +53,7 @@ public class MainApp {
                 if (commArray[0].equals("createstorage") && commArray.length == 3) {
                     storage.createStorage(commArray[1], commArray[2]);
                     continue;
+
                 }
 
                 if (commArray[0].equals("config") && commArray.length >= 3 && commArray.length <= 7) {
@@ -78,6 +79,7 @@ public class MainApp {
                 }
 
                 //CREATE
+
                 if (commArray[0].equals("createdir") && commArray.length == 2) {
                     create.createDir(commArray[1]);
                     continue;
@@ -134,8 +136,8 @@ public class MainApp {
                 }
 
                 //SEARCH
-                if (commArray[0].equals("getfiles") && commArray.length == 2) {
-                    System.out.println((search.getFile(commArray[1])));
+                if (commArray[0].equals("getfile") && commArray.length == 2) {
+                    printFile(search.getFile(commArray[1]));
                     continue;
                 }
 
@@ -145,7 +147,7 @@ public class MainApp {
                 }
 
                 if (commArray[0].equals("getallfiles") && commArray.length == 1) {
-                    System.out.println((search.getAllFiles()));
+                    printFiles(search.getAllFiles(commArray[1]));
                     continue;
                 }
 
